@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { APIResponse, Game } from 'src/app/models';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit{
   public games!: Array<Game>
   constructor(
     private httpService:HttpService,
-    private activatedRoute:ActivatedRoute
+    private router: Router,
+    private activatedRoute:ActivatedRoute,
   ){}
 
   ngOnInit(): void {
@@ -33,6 +34,11 @@ export class HomeComponent implements OnInit{
       this.games = gameList.results;
       console.log(this.games)
     })
+
+  }
+
+  openGameDetails(id:any){
+    this.router.navigate(['details',id]);
 
   }
 }
